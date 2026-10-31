@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#14251f">
+<meta name="description" content="Seu painel pessoal de preparação para FUVEST e ENEM.">
+<link rel="manifest" href="manifest.json">
+<title>Revisa — seu vestibular, um dia de cada vez</title>
+<style>
+:root{--bg:#f4f5f1;--panel:#fff;--ink:#18231f;--muted:#68736d;--line:#e2e7e1;--green:#245c47;--lime:#d9f27a;--soft:#eaf2eb;--orange:#f5b66b;--red:#b84747;--shadow:0 12px 32px rgba(24,35,31,.06);--radius:20px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #a9c8b6;outline-offset:2px}
+.app{max-width:1200px;margin:auto;padding:22px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:11px}.logo{width:42px;height:42px;background:var(--green);color:var(--lime);display:grid;place-items:center;border-radius:14px;font-weight:900;font-size:21px}.brand h1{font-size:21px;margin:0;letter-spacing:-.6px}.brand p{margin:0;color:var(--muted);font-size:12px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:#fff;padding:10px 14px;border-radius:12px;font-weight:650;color:var(--ink)}.btn.primary{background:var(--green);color:#fff;border-color:var(--green)}.btn.lime{background:var(--lime);border-color:var(--lime)}.btn.small{padding:7px 10px;font-size:12px}
+.hero{background:var(--green);color:#fff;border-radius:26px;padding:28px 30px;display:grid;grid-template-columns:1.5fr 1fr;gap:22px;align-items:center;box-shadow:var(--shadow);margin-bottom:20px}.eyebrow{text-transform:uppercase;letter-spacing:1.8px;font-size:10px;font-weight:800;color:var(--lime)}.hero h2{font-size:clamp(26px,4vw,39px);letter-spacing:-1.4px;line-height:1.07;margin:10px 0}.hero p{color:#d7e4dc;max-width:560px;margin:0}.hero-right{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);border-radius:19px;padding:18px}.hero-stat{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.hero-stat strong{font-size:25px}.track{height:8px;background:rgba(255,255,255,.17);border-radius:20px;overflow:hidden}.track span{display:block;height:100%;background:var(--lime);width:0;transition:width .25s}.hero-right small{display:block;color:#d7e4dc;margin-top:9px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}.metric{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:16px}.metric .label{color:var(--muted);font-size:12px}.metric strong{display:block;font-size:27px;letter-spacing:-.8px;margin:6px 0 2px}.metric small{color:var(--muted);font-size:11px}
+.grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);gap:18px;align-items:start}.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.panel h3{margin:0;font-size:17px;letter-spacing:-.3px}.sub{color:var(--muted);font-size:12px;margin-top:4px}.pill{font-size:11px;padding:5px 9px;border-radius:99px;background:var(--soft);color:var(--green);font-weight:750}.task-list{display:grid;gap:9px}.task{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:11px;align-items:center;padding:13px;border:1px solid var(--line);border-radius:14px;transition:background .2s}.task.done{background:#f6f8f5}.task.done .task-title{text-decoration:line-through;color:#87918b}.check{appearance:none;width:20px;height:20px;border:1.7px solid #b8c2bb;border-radius:7px;margin:0;display:grid;place-items:center}.check:checked{background:var(--green);border-color:var(--green)}.check:checked:after{content:"✓";color:#fff;font-size:13px;font-weight:900}.task-title{font-weight:700;font-size:13px}.task-meta{font-size:11px;color:var(--muted);margin-top:3px}.tag{font-size:10px;font-weight:750;background:#f1f2ed;border-radius:7px;padding:5px 7px;white-space:nowrap}.tag.review{background:#fff1dc;color:#80551c}.empty{border:1px dashed #cbd4cc;border-radius:14px;padding:22px;text-align:center;color:var(--muted);font-size:13px}.form-row{display:flex;gap:8px;flex-wrap:wrap}.field{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px;background:#fff;color:var(--ink)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.form-grid .full{grid-column:1/-1}.label-sm{font-size:11px;color:var(--muted);font-weight:700;display:block;margin:0 0 5px}.subject-bars{display:grid;gap:14px}.subject-row{display:grid;grid-template-columns:90px 1fr 32px;align-items:center;gap:10px;font-size:12px}.bar{height:7px;background:#edf0eb;border-radius:20px;overflow:hidden}.bar span{display:block;height:100%;background:var(--green);border-radius:20px}.subject-row strong{text-align:right;font-size:12px}.review-form{display:flex;gap:8px;flex-wrap:wrap}.review-form input{flex:1;min-width:150px}.review-item{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:11px 0}.review-item:last-child{border:0}.review-item strong{font-size:13px;display:block}.review-item small{font-size:11px;color:var(--muted)}.focus-card{background:#f1f6e5;border-radius:15px;padding:16px}.focus-card strong{font-size:14px}.focus-card p{font-size:12px;color:#52604c;margin:5px 0 12px}.focus-controls{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.timer{font-size:25px;font-weight:850;letter-spacing:-1px;font-variant-numeric:tabular-nums}.footer{padding:10px 0 25px;text-align:center;color:var(--muted);font-size:11px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#17251f;color:#fff;padding:12px 18px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:10;font-size:13px}.modal-backdrop{position:fixed;inset:0;background:#10201980;display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modal{background:#fff;border-radius:20px;padding:22px;max-width:520px;width:100%;max-height:90vh;overflow:auto}.modal h3{margin-top:0}.muted{color:var(--muted);font-size:12px}.danger{color:var(--red)}.tabs{display:flex;gap:6px;flex-wrap:wrap}.tab{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 11px;font-size:12px;font-weight:700}.tab.active{background:var(--green);border-color:var(--green);color:#fff}
+@media(max-width:820px){.app{padding:14px}.hero{grid-template-columns:1fr;padding:22px}.metrics{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.topbar{align-items:flex-start}.top-actions .btn{padding:8px 10px;font-size:12px}}
+@media(max-width:430px){.brand h1{font-size:18px}.brand p{font-size:10px}.metrics{gap:8px}.metric{padding:12px}.metric strong{font-size:23px}.panel{padding:15px}.task{grid-template-columns:22px 1fr}.task .tag{grid-column:2;justify-self:start}.form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}.subject-row{grid-template-columns:75px 1fr 25px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><div class="logo">R</div><div><h1>revisa<span style="color:#6b8c79">.</span></h1><p>seu vestibular, um dia de cada vez</p></div></div>
+  <div class="top-actions"><button class="btn" id="exportBtn">Exportar dados</button><button class="btn" id="importBtn">Importar</button><button class="btn primary" id="settingsBtn">Configurar</button><input type="file" id="importFile" accept="application/json" hidden></div>
+</header>
+<section class="hero">
+  <div><div class="eyebrow" id="todayLabel">SEU PLANO DE HOJE</div><h2>Você não precisa resolver o ano inteiro hoje.</h2><p>Abra o painel, escolha a próxima tarefa e comece. Consistência vence o plano perfeito.</p></div>
+  <div class="hero-right"><div class="hero-stat"><span>Progresso de hoje</span><strong id="heroProgress">0%</strong></div><div class="track"><span id="heroBar"></span></div><small id="heroSub">0 de 0 tarefas concluídas</small></div>
+</section>
+<section class="metrics">
+  <div class="metric"><div class="label">Tarefas concluídas hoje</div><strong id="doneMetric">0</strong><small>marcadas por você</small></div>
+  <div class="metric"><div class="label">Minutos estudados hoje</div><strong id="minutesMetric">0</strong><small>registre seu estudo</small></div>
+  <div class="metric"><div class="label">Revisões para hoje</div><strong id="reviewsMetric">0</strong><small>revisões agendadas</small></div>
+  <div class="metric"><div class="label">Sequência de dias</div><strong id="streakMetric">0</strong><small>com estudo registrado</small></div>
+</section>
+<div class="grid">
+<main>
+  <section class="panel">
+    <div class="panel-head"><div><h3>Plano de hoje</h3><div class="sub">Uma lista clara. Faça uma tarefa por vez.</div></div><span class="pill" id="datePill"></span></div>
+    <div class="tabs" id="taskFilters" style="margin-bottom:13px"><button class="tab active" data-filter="all">Tudo</button><button class="tab" data-filter="pending">Pendentes</button><button class="tab" data-filter="done">Concluídas</button></div>
+    <div id="taskList" class="task-list"></div>
+    <button class="btn" id="addTaskToggle" style="width:100%;margin-top:12px">＋ Adicionar tarefa</button>
+    <div id="addTaskForm" hidden>
+      <div class="form-grid">
+        <div class="full"><label class="label-sm" for="taskName">O que você vai fazer?</label><input class="field" id="taskName" placeholder="Ex.: 15 questões de funções"></div>
+        <div><label class="label-sm" for="taskSubject">Matéria</label><select class="field" id="taskSubject"><option>Matemática</option><option>Física</option><option>Química</option><option>Biologia</option><option>Linguagens</option><option>Humanas</option><option>Redação</option><option>Obras literárias</option><option>Simulado</option><option>Organização</option></select></div>
+        <div><label class="label-sm" for="taskMinutes">Tempo estimado (min)</label><input class="field" id="taskMinutes" type="number" min="5" step="5" value="45"></div>
+        <div class="full"><button class="btn primary" id="saveTask" style="width:100%">Salvar tarefa</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><div><h3>Caderno de erros</h3><div class="sub">Erro bem corrigido vira ponto forte.</div></div><span class="pill" id="errorCount">0 pendentes</span></div>
+    <div class="form-grid" style="margin-top:0">
+      <div><label class="label-sm" for="errorSubject">Matéria</label><select class="field" id="errorSubject"><option>Matemática</option><option>Física</option><option>Química</option><option>Biologia</option><option>Linguagens</option><option>Humanas</option></select></div>
+      <div><label class="label-sm" for="errorTopic">Assunto</label><input class="field" id="errorTopic" placeholder="Ex.: determinantes"></div>
+      <div class="full"><label class="label-sm" for="errorWhy">Por que errei?</label><select class="field" id="errorWhy"><option>Não sabia a teoria</option><option>Sabia, mas não soube aplicar</option><option>Erro de interpretação</option><option>Erro de cálculo ou atenção</option><option>Falta de tempo</option></select></div>
+      <div class="full"><label class="label-sm" for="errorFix">Como vou corrigir?</label><input class="field" id="errorFix" placeholder="Ex.: rever a regra e resolver 5 questões parecidas"></div>
+      <div class="full"><button class="btn primary" id="saveError" style="width:100%">Adicionar ao caderno</button></div>
+    </div>
+    <div id="errorList" style="margin-top:12px"></div>
+  </section>
+  <section class="panel">
+    <div class="panel-head"><div><h3>Treino de questões</h3><div class="sub">Registre o volume e veja sua taxa de acerto.</div></div></div>
+    <div class="form-grid" style="margin-top:0">
+      <div><label class="label-sm" for="qSubject">Matéria</label><select class="field" id="qSubject"><option>Matemática</option><option>Física</option><option>Química</option><option>Biologia</option><option>Linguagens</option><option>Humanas</option></select></div>
+      <div><label class="label-sm" for="qSource">Origem</label><select class="field" id="qSource"><option>FUVEST</option><option>ENEM</option><option>UNICAMP</option><option>Apostila</option><option>Outro vestibular</option></select></div>
+      <div><label class="label-sm" for="qTotal">Questões feitas</label><input class="field" id="qTotal" type="number" min="1" value="10"></div>
+      <div><label class="label-sm" for="qCorrect">Acertos</label><input class="field" id="qCorrect" type="number" min="0" value="6"></div>
+      <div class="full"><button class="btn primary" id="saveQuestions" style="width:100%">Registrar treino</button></div>
+    </div>
+    <div id="questionSummary" class="focus-card" style="margin-top:12px;background:#f4f5f1"></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><div><h3>Revisões espaçadas</h3><div class="sub">Cadastre o que estudou e escolha quando rever.</div></div><span class="pill">7 · 14 · 21 dias</span></div>
+    <div class="form-row"><input class="field" id="reviewTopic" placeholder="Conteúdo estudado (ex.: matrizes)" style="flex:1;min-width:170px"><select class="field" id="reviewSubject" style="max-width:150px"><option>Matemática</option><option>Física</option><option>Química</option><option>Biologia</option><option>Linguagens</option><option>Humanas</option><option>Redação</option><option>Obras literárias</option></select><select class="field" id="reviewInterval" style="max-width:110px"><option value="7">7 dias</option><option value="14">14 dias</option><option value="21">21 dias</option></select><button class="btn primary" id="addReview">Agendar</button></div>
+    <div id="reviewList" style="margin-top:12px"></div>
+  </section>
+</main>
+<aside>
+  <section class="panel">
+    <div class="panel-head"><div><h3>Seu foco de hoje</h3><div class="sub">Comece pequeno. Depois continue.</div></div></div>
+    <div class="focus-card"><strong>Bloco de foco</strong><p>25 minutos estudando, sem trocar de aba. Faça uma pausa curta quando terminar.</p><div class="focus-controls"><div class="timer" id="timer">25:00</div><button class="btn primary small" id="timerStart">Começar</button><button class="btn small" id="timerReset">Reiniciar</button></div></div>
+    <p class="muted" style="margin-bottom:0">Este timer não bloqueia aplicativos ou sites. Ative um bloqueador de distrações no celular/computador quando precisar.</p>
+  </section>
+  <section class="panel">
+    <div class="panel-head"><div><h3>Registro de estudo</h3><div class="sub">Registre o tempo real que você estudou.</div></div></div>
+    <div class="form-grid" style="margin-top:0"><div><label class="label-sm" for="logSubject">Matéria</label><select class="field" id="logSubject"><option>Matemática</option><option>Física</option><option>Química</option><option>Biologia</option><option>Linguagens</option><option>Humanas</option><option>Redação</option><option>Obras literárias</option><option>Simulado</option></select></div><div><label class="label-sm" for="logMinutes">Minutos</label><input class="field" id="logMinutes" type="number" min="1" value="45"></div><div class="full"><label class="label-sm" for="logNote">Observação (opcional)</label><input class="field" id="logNote" placeholder="Ex.: errei questões de determinante"></div><div class="full"><button class="btn primary" id="saveLog" style="width:100%">Salvar registro</button></div></div>
+  </section>
+  <section class="panel">
+    <div class="panel-head"><div><h3>Estudo por matéria</h3><div class="sub">Minutos registrados nos últimos 7 dias.</div></div></div><div id="subjectBars" class="subject-bars"></div>
+  </section>
+  <section class="panel">
+    <div class="panel-head"><div><h3>Próximo passo</h3></div></div>
+    <p class="muted" style="font-size:13px;margin-top:0">Se estiver travado, reduza o começo: abra a lista, resolva <b>uma questão</b> e só então decida a próxima. Você pode atualizar seu plano diariamente sem perder os registros.</p>
+    <button class="btn" id="resetDayBtn" style="width:100%">Reiniciar tarefas de hoje</button>
+  </section>
+</aside>
+</div>
+<div class="footer">Revisa · versão inicial local · seus dados ficam neste navegador, neste dispositivo.</div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="modal-backdrop" id="settingsModal"><div class="modal"><div class="panel-head"><h3>Configurar seu Revisa</h3><button class="btn small" id="closeSettings">Fechar</button></div><p class="muted">Ajuste a meta de estudo individual. A versão inicial guarda os dados neste navegador.</p><label class="label-sm" for="dailyGoal">Meta diária de estudo individual (minutos)</label><input class="field" id="dailyGoal" type="number" min="30" step="15" value="360"><div style="display:flex;gap:8px;margin-top:14px"><button class="btn primary" id="saveSettings">Salvar</button><button class="btn danger" id="clearAll">Apagar todos os dados</button></div><hr style="border:0;border-top:1px solid var(--line);margin:20px 0"><h3>Integrações ainda não conectadas</h3><p class="muted">Google Calendar, login entre dispositivos e bloqueio de sites precisam de configuração adicional e não estão ativos nesta versão. Não insira senhas ou credenciais nesta página.</p></div></div>
+<script>
+const KEY='revisa-v1-data';
+const subjects=['Matemática','Física','Química','Biologia','Linguagens','Humanas','Redação','Obras literárias','Simulado','Organização'];
+const today=()=>new Date().toLocaleDateString('en-CA');
+const dateObj=(s)=>new Date(s+'T12:00:00');
+const fmtDate=(s)=>dateObj(s).toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
+const id=()=>Math.random().toString(36).slice(2,10);
+const initialTasks=[
+ ['Matemática','Resolver questões de vestibular (priorizar execução, não só teoria)',60],
+ ['FUVEST','Corrigir questões e registrar os erros mais importantes',45],
+ ['Naturezas','Resolver questões de Física ou Química',60],
+ ['ENEM','Treino de Matemática ou correção de questões',45],
+ ['Linguagens/Humanas','Revisão curta no Anki ou questões',25],
+ ['Redação','Planejar ou escrever um parágrafo de desenvolvimento',40]
+];
+let data=load();
+function load(){try{const d=JSON.parse(localStorage.getItem(KEY));if(d&&d.tasks&&d.reviews&&d.logs){d.errors=d.errors||[];d.questions=d.questions||[];return d}}catch(e){}return {tasks:[],reviews:[],logs:[],errors:[],questions:[],goal:360,taskDay:today(),seeded:false};}
+function save(){localStorage.setItem(KEY,JSON.stringify(data));render();}
+function seedToday(){if(data.taskDay!==today()){data.taskDay=today();data.tasks=[];data.seeded=false;}if(!data.seeded&&data.tasks.length===0){data.tasks=initialTasks.map((x,i)=>({id:id(),name:x[1],subject:x[0],minutes:x[2],done:false,day:today()}));data.seeded=true;}localStorage.setItem(KEY,JSON.stringify(data));}
+function toast(s){const t=document.getElementById('toast');t.textContent=s;t.style.display='block';clearTimeout(window.toastTimeout);window.toastTimeout=setTimeout(()=>t.style.display='none',2500)}
+function renderTasks(){const filter=document.querySelector('#taskFilters .active')?.dataset.filter||'all';const list=document.getElementById('taskList');let tasks=data.tasks.filter(t=>filter==='all'||(filter==='done'?t.done:!t.done));if(!tasks.length){list.innerHTML='<div class="empty">Nada por aqui. Adicione uma tarefa ou aproveite a pausa.</div>';return}list.innerHTML=tasks.map(t=>`<label class="task ${t.done?'done':''}"><input class="check" type="checkbox" data-task="${t.id}" ${t.done?'checked':''}><div><div class="task-title">${esc(t.name)}</div><div class="task-meta">${esc(t.subject)} · ${t.minutes} min</div></div><span class="tag">${t.done?'Concluída':'Pendente'}</span></label>`).join('');list.querySelectorAll('[data-task]').forEach(c=>c.addEventListener('change',()=>{const t=data.tasks.find(x=>x.id===c.dataset.task);if(t)t.done=c.checked;save();}));}
+function renderReviews(){const due=data.reviews.filter(r=>r.due<=today()).sort((a,b)=>a.due.localeCompare(b.due));const upcoming=data.reviews.filter(r=>r.due>today()).sort((a,b)=>a.due.localeCompare(b.due)).slice(0,3);const box=document.getElementById('reviewList');if(!data.reviews.length){box.innerHTML='<div class="empty">Nenhuma revisão agendada ainda.</div>';return}box.innerHTML=(due.length?'<div class="sub" style="font-weight:800;color:#80551c;margin-bottom:5px">PARA REVISAR AGORA</div>':'')+due.map(r=>reviewHtml(r,true)).join('')+(upcoming.length?'<div class="sub" style="font-weight:800;margin:12px 0 3px">PRÓXIMAS</div>'+upcoming.map(r=>reviewHtml(r,false)).join(''):'')+(due.length===0&&upcoming.length===0?'<div class="empty">Nenhuma revisão pendente.</div>':'');box.querySelectorAll('[data-reviewdone]').forEach(b=>b.addEventListener('click',()=>{const r=data.reviews.find(x=>x.id===b.dataset.reviewdone);if(r){r.doneAt=today();r.due='';r.completed=true;}save();toast('Revisão concluída!')}));box.querySelectorAll('[data-reviewdel]').forEach(b=>b.addEventListener('click',()=>{data.reviews=data.reviews.filter(x=>x.id!==b.dataset.reviewdel);save()}));}
+function reviewHtml(r,due){return `<div class="review-item"><div><strong>${esc(r.topic)}</strong><small>${esc(r.subject)} · ${due?'Venceu em '+fmtDate(r.due):'Revisar em '+fmtDate(r.due)}</small></div><div style="display:flex;gap:5px;align-items:center">${due?`<button class="btn small primary" data-reviewdone="${r.id}">Feita</button>`:''}<button class="btn small" data-reviewdel="${r.id}" aria-label="Excluir revisão">×</button></div></div>`}
+function renderBars(){let since=new Date();since.setDate(since.getDate()-6);const logs=data.logs.filter(l=>l.day>=since.toLocaleDateString('en-CA'));let sums={};subjects.forEach(s=>sums[s]=0);logs.forEach(l=>sums[l.subject]=(sums[l.subject]||0)+Number(l.minutes));const max=Math.max(1,...Object.values(sums));const sorted=Object.entries(sums).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);document.getElementById('subjectBars').innerHTML=sorted.length?sorted.map(([s,m])=>`<div class="subject-row"><span>${esc(s)}</span><div class="bar"><span style="width:${m/max*100}%"></span></div><strong>${m}</strong></div>`).join(''):'<div class="empty">Seus registros aparecerão aqui.</div>'}
+
+function renderErrors(){
+ const open=data.errors.filter(e=>!e.resolved);
+ document.getElementById('errorCount').textContent=open.length+' pendentes';
+ const box=document.getElementById('errorList');
+ if(!data.errors.length){box.innerHTML='<div class="empty">Seu caderno começa com o primeiro erro que você decidir entender.</div>';return}
+ box.innerHTML=data.errors.slice().reverse().map(e=>`<div class="review-item"><div style="min-width:0"><strong>${esc(e.topic)} · ${esc(e.subject)}</strong><small>${esc(e.why)}${e.fix?' — Próxima ação: '+esc(e.fix):''}</small></div><div style="display:flex;gap:5px;flex-shrink:0">${e.resolved?'<span class="pill">Resolvido</span>':`<button class="btn small primary" data-errorresolve="${e.id}">Corrigi</button>`}<button class="btn small" data-errordel="${e.id}">×</button></div></div>`).join('');
+ box.querySelectorAll('[data-errorresolve]').forEach(b=>b.onclick=()=>{const e=data.errors.find(x=>x.id===b.dataset.errorresolve);if(e){e.resolved=true;e.resolvedAt=today();save();toast('Erro marcado como corrigido.')}});
+ box.querySelectorAll('[data-errordel]').forEach(b=>b.onclick=()=>{data.errors=data.errors.filter(x=>x.id!==b.dataset.errordel);save()});
+}
+function renderQuestionSummary(){
+ const qs=data.questions||[];
+ const total=qs.reduce((s,q)=>s+q.total,0),correct=qs.reduce((s,q)=>s+q.correct,0);
+ const pct=total?Math.round(correct/total*100):0;
+ document.getElementById('questionSummary').innerHTML=`<div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><div><div class="muted">Acerto acumulado registrado</div><strong style="font-size:25px">${pct}%</strong></div><div style="text-align:right"><div class="muted">Questões · acertos</div><strong style="font-size:18px">${total} · ${correct}</strong></div></div><div class="track" style="background:#dfe5dc;margin-top:10px"><span style="width:${pct}%;background:var(--green)"></span></div><div class="muted" style="margin-top:8px">${qs.length?qs.length+' treinos registrados. Use a taxa de acerto para escolher o que revisar.':'Nenhum treino registrado ainda.'}</div>`;
+}
+
+function render(){const now=new Date();document.getElementById('todayLabel').textContent=now.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'}).toUpperCase();document.getElementById('datePill').textContent=fmtDate(today());renderTasks();renderReviews();renderBars();renderErrors();renderQuestionSummary();const n=data.tasks.length,d=data.tasks.filter(t=>t.done).length,p=n?Math.round(d/n*100):0;document.getElementById('heroProgress').textContent=p+'%';document.getElementById('heroBar').style.width=p+'%';document.getElementById('heroSub').textContent=`${d} de ${n} tarefas concluídas`;document.getElementById('doneMetric').textContent=d;const mins=data.logs.filter(l=>l.day===today()).reduce((s,l)=>s+Number(l.minutes),0);document.getElementById('minutesMetric').textContent=mins;document.getElementById('reviewsMetric').textContent=data.reviews.filter(r=>r.due&&r.due<=today()).length;document.getElementById('streakMetric').textContent=streak();document.getElementById('dailyGoal').value=data.goal||360;}
+function streak(){const days=new Set(data.logs.map(l=>l.day));let n=0,d=new Date();if(!days.has(d.toLocaleDateString('en-CA')))d.setDate(d.getDate()-1);while(days.has(d.toLocaleDateString('en-CA'))&&n<365){n++;d.setDate(d.getDate()-1)}return n}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+document.getElementById('taskFilters').addEventListener('click',e=>{const b=e.target.closest('[data-filter]');if(!b)return;document.querySelectorAll('#taskFilters .tab').forEach(x=>x.classList.toggle('active',x===b));renderTasks()});
+document.getElementById('addTaskToggle').onclick=()=>{const f=document.getElementById('addTaskForm');f.hidden=!f.hidden;if(!f.hidden)document.getElementById('taskName').focus()};
+document.getElementById('saveTask').onclick=()=>{const name=document.getElementById('taskName').value.trim();if(!name){toast('Escreva o nome da tarefa primeiro.');return}data.tasks.push({id:id(),name,subject:document.getElementById('taskSubject').value,minutes:Math.max(5,Number(document.getElementById('taskMinutes').value)||45),done:false,day:today()});document.getElementById('taskName').value='';document.getElementById('addTaskForm').hidden=true;save();toast('Tarefa adicionada.')};
+document.getElementById('addReview').onclick=()=>{const topic=document.getElementById('reviewTopic').value.trim();if(!topic){toast('Digite o conteúdo que quer revisar.');return}const due=new Date();due.setDate(due.getDate()+Number(document.getElementById('reviewInterval').value));data.reviews.push({id:id(),topic,subject:document.getElementById('reviewSubject').value,created:today(),due:due.toLocaleDateString('en-CA'),completed:false});document.getElementById('reviewTopic').value='';save();toast('Revisão agendada.')};
+document.getElementById('saveLog').onclick=()=>{const minutes=Math.max(1,Number(document.getElementById('logMinutes').value)||1);data.logs.push({id:id(),day:today(),subject:document.getElementById('logSubject').value,minutes,note:document.getElementById('logNote').value.trim()});document.getElementById('logNote').value='';save();toast('Tempo de estudo registrado.')};
+document.getElementById('settingsBtn').onclick=()=>document.getElementById('settingsModal').style.display='flex';document.getElementById('closeSettings').onclick=()=>document.getElementById('settingsModal').style.display='none';document.getElementById('settingsModal').onclick=e=>{if(e.target.id==='settingsModal')e.currentTarget.style.display='none'};
+document.getElementById('saveSettings').onclick=()=>{data.goal=Math.max(30,Number(document.getElementById('dailyGoal').value)||360);save();document.getElementById('settingsModal').style.display='none';toast('Meta atualizada.')};
+document.getElementById('clearAll').onclick=()=>{if(confirm('Apagar todas as tarefas, revisões e registros deste navegador? Exporte seus dados antes se quiser guardá-los.')){localStorage.removeItem(KEY);data={tasks:[],reviews:[],logs:[],errors:[],questions:[],goal:360,taskDay:today(),seeded:false};seedToday();render();document.getElementById('settingsModal').style.display='none';toast('Dados apagados.')}};
+document.getElementById('resetDayBtn').onclick=()=>{if(confirm('Desmarcar todas as tarefas de hoje? Seus registros de tempo serão mantidos.')){data.tasks.forEach(t=>t.done=false);save();toast('Tarefas desmarcadas.')}};
+document.getElementById('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='revisa-backup-'+today()+'.json';a.click();URL.revokeObjectURL(a.href);toast('Backup exportado.')};
+document.getElementById('importBtn').onclick=()=>document.getElementById('importFile').click();document.getElementById('importFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!d.tasks||!d.reviews||!d.logs)throw Error();if(confirm('Importar este backup e substituir os dados atuais?')){data=d;save();toast('Backup importado.')}}catch(err){toast('Arquivo inválido. Use um backup do Revisa.')}e.target.value=''};
+
+document.getElementById('saveError').onclick=()=>{
+ const topic=document.getElementById('errorTopic').value.trim();
+ if(!topic){toast('Informe o assunto do erro.');return}
+ data.errors=data.errors||[];
+ data.errors.push({id:id(),subject:document.getElementById('errorSubject').value,topic,why:document.getElementById('errorWhy').value,fix:document.getElementById('errorFix').value.trim(),created:today(),resolved:false});
+ document.getElementById('errorTopic').value='';document.getElementById('errorFix').value='';save();toast('Erro salvo no caderno.');
+};
+document.getElementById('saveQuestions').onclick=()=>{
+ const total=Math.max(1,Number(document.getElementById('qTotal').value)||1);
+ const correct=Number(document.getElementById('qCorrect').value);
+ if(!Number.isFinite(correct)||correct<0||correct>total){toast('Os acertos precisam ficar entre zero e o total.');return}
+ data.questions=data.questions||[];
+ data.questions.push({id:id(),day:today(),subject:document.getElementById('qSubject').value,source:document.getElementById('qSource').value,total,correct});
+ save();toast('Treino de questões registrado.');
+};
+
+let timerSeconds=1500,timerInterval=null;function showTimer(){document.getElementById('timer').textContent=String(Math.floor(timerSeconds/60)).padStart(2,'0')+':'+String(timerSeconds%60).padStart(2,'0')}document.getElementById('timerStart').onclick=()=>{if(timerInterval){clearInterval(timerInterval);timerInterval=null;document.getElementById('timerStart').textContent='Continuar';return}document.getElementById('timerStart').textContent='Pausar';timerInterval=setInterval(()=>{timerSeconds--;showTimer();if(timerSeconds<=0){clearInterval(timerInterval);timerInterval=null;document.getElementById('timerStart').textContent='Começar';toast('Bloco de foco concluído. Faça uma pausa curta!');if('Notification'in window&&Notification.permission==='granted')new Notification('Revisa: bloco concluído',{body:'Você fez 25 minutos. Hora de uma pausa curta.'});}},1000);if('Notification'in window&&Notification.permission==='default')Notification.requestPermission()};document.getElementById('timerReset').onclick=()=>{clearInterval(timerInterval);timerInterval=null;timerSeconds=1500;showTimer();document.getElementById('timerStart').textContent='Começar'};
+seedToday();render();
+if('serviceWorker'in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script>
+</body>
+</html>

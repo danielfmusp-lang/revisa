@@ -1,0 +1,11 @@
+{
+  "name": "Revisa — Vestibular",
+  "short_name": "Revisa",
+  "description": "Seu painel pessoal de preparação para FUVEST e ENEM.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4f5f1",
+  "theme_color": "#14251f",
+  "lang": "pt-BR",
+  "icons": []
+}
